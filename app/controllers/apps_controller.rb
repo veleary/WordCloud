@@ -5,9 +5,9 @@ class AppsController < ApplicationController
   # GET /apps.json
   def index
     if params[:tag]
-      @apps = Apps.tagged_with(params[:tag])
+      @apps = App.tagged_with(params[:tag])
     else
-      @apps = Apps.all
+      @apps = App.all
     end
   end
 

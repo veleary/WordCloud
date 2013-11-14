@@ -1,7 +1,14 @@
-<h1>Listing apps</h1>
+<h1>All Apps</h1>
 
 
-  <tbody>
+
+<div id="tag_cloud">
+  <% tag_cloud App.tag_counts, %w{s m l} do |tag, css_class|%>
+  <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <%end%>
+</div>
+
+
     <% @apps.each do |app| %>
     
         <h2><%= app.name %><h2>
@@ -16,4 +23,5 @@
 
 <br>
 
+<%= link_to 'Home', apps_path %>
 <%= link_to 'New App', new_app_path %>
