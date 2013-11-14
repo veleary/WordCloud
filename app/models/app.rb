@@ -1,4 +1,3 @@
-class App < ActiveRecord::Base
-  attr_accessible :description, :name, :tag_list
+class App < ActiveRecord::Base  
   acts_as_taggable
 end

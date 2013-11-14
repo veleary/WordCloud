@@ -1,25 +1,18 @@
 <h1>Listing apps</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>      
-    </tr>
-  </thead>
 
   <tbody>
     <% @apps.each do |app| %>
-      <tr>
-        <td><%= app.name %></td>
-        <td><%= app.description %></td>
-        <td><%= link_to 'Show', app %></td>
-        <td><%= link_to 'Edit', edit_app_path(app) %></td>
-        <td><%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    
+        <h2><%= app.name %><h2>
+        <h4><%= app.description %></h4>
+        <p>Tags: <%= app.tag_list %></p>
+        <%#= link_to 'Show', app %>
+        <%#= link_to 'Edit', edit_app_path(app) %>
+        <%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %>
+     
     <% end %>
-  </tbody>
-</table>
+  
 
 <br>
 
