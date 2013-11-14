@@ -2,7 +2,7 @@ WordCloud::Application.routes.draw do
   resources :apps 
 
 
-  namespace :api do 
+  namespace :api :defaults => {:format => :json} do 
     resources :tags
   end
 
