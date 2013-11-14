@@ -14,6 +14,9 @@ gem 'acts-as-taggable-on'
 
 gem 'jqcloud-rails'
 
+gem 'better_errors'
+gem 'binding_of_caller'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

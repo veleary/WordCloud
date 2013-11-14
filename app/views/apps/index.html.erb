@@ -13,14 +13,11 @@
     
         <h2><%= app.name %><h2>
         <h4><%= app.description %></h4>
-        <p>Tags: <%= get_tag_list(app)%></p>
+        <p>Tags: <%= app.tag_list %></p>
         <%#= link_to 'Show', app %>
         <%#= link_to 'Edit', edit_app_path(app) %>
-        <%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %>
-     
+        <%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %>     
     <% end %>
-  
-
 <br>
 
 <%= link_to 'Home', apps_path %>
