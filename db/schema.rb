@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20131114143511) do
   create_table "apps", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.text     "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
