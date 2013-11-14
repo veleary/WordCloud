@@ -1,7 +1,4 @@
 WordCloud::Application.routes.draw do
-  resources :apps 
-
-
-
-  
+  get 'tags/:tag', to: 'apps#index', as: :tag
+  resources :apps   
 end
