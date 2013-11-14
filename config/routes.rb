@@ -2,7 +2,9 @@ WordCloud::Application.routes.draw do
   resources :apps 
 
 
-  
+  namespace :api do 
+    resources :tags
+  end
 
   # Example resource route with options:
   #   resources :products do
