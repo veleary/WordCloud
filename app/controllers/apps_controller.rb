@@ -10,6 +10,7 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
+    @apps = App.all
   end
 
   # GET /apps/new
@@ -69,6 +70,6 @@ class AppsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
-      params[:app]
+      params.permit(:app)
     end
 end
