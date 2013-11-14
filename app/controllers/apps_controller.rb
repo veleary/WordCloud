@@ -4,7 +4,11 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-    @apps = App.all
+    if params[:tag]
+      @apps = Apps.tagged_with(params[:tag])
+    else
+      @apps = Apps.all
+    end
   end
 
   # GET /apps/1
