@@ -1,6 +1,6 @@
 class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :update, :destroy]
-  
+  require 'csv'
 
   # GET /apps
   # GET /apps.json
@@ -28,30 +28,42 @@ class AppsController < ApplicationController
   def edit
   end
 
-  def make_tags(app)
-    categories = (File.read("Data/category.csv").strip) 
-    key = ["category"]
-    category_hash = CSV.parse(categories).map {|a| Hash[key.zip(a)]}
+  def get_category  
+    # @category_hash = {}
+    # CSV.foreach("Data/category.csv", :headers => true, :header_converters => :symbol, :converters => :all) do |row| 
+    #   @category_hash[row.fields[0]] = Hash[row.headers[1..-1]]
+      # @category_hash.each_key do |key|
+        
+      # end
+    @category_hash = {"Business" => 0, "Communication" => 0, "Productivity" => 0, "Money & Finance" => 0, "Marketing & Social Media" => 0, "Music & Video" => 0, "Photos & Graphics" => 0, "Web Design & Development" => 0, "Working Together" => 0, "Travel & Lifestyle" => 0, "Just for Fun" => 0}
+    
+  end
+    
+    def make_tags(app)
     words_array = app.description.split("\s") 
-    tag_categories = []  
-    category_hash.each do |category, subcategory|
-      if words_array.include?(category)
-        tag_categories << cateogry
-        if words_array.include?(subcategory)
-          tag_categories << subcategory
-        end
+    @tag_categories = []    
+     @category_hash.each_key do |key| 
+      if words_array.include?(key)
+      @tag_categories << key    
+      # if words_array.include?(subcategory)
+      #   @tag_categories.push subcategory
+      # end      
+      # else  
+      #   @tag_categories << words_array
       end
-    end
-    return app.tag_list = tag_categories
+     end
   end
 
   # POST /apps
   # POST /apps.json
   def create
-    @app = App.new(app_params)    
+    @app = App.new(app_params) 
+    get_category
+    make_tags(@app)
+    @app.tag_list = @tag_categories
     respond_to do |format|
-      if @app.save
-        make_tags(@app)
+      if @app.save   
+       
         format.html { redirect_to @app, notice: 'App was successfully created.' }
         format.json { render action: 'show', status: :created, location: @app }
 
