@@ -28,17 +28,33 @@ class AppsController < ApplicationController
   def edit
   end
 
+  def make_tags(app)
+    categories = (File.read("Data/category.csv").strip) 
+    key = ["category"]
+    category_hash = CSV.parse(categories).map {|a| Hash[key.zip(a)]}
+    words_array = app.description.split("\s") 
+    tag_categories = []  
+    category_hash.each do |category, subcategory|
+      if words_array.include?(category)
+        tag_categories << cateogry
+        if words_array.include?(subcategory)
+          tag_categories << subcategory
+        end
+      end
+    end
+    return app.tag_list = tag_categories
+  end
+
   # POST /apps
   # POST /apps.json
   def create
-    @app = App.new(app_params)
-    @app.tag_list = @app.description
+    @app = App.new(app_params)    
     respond_to do |format|
       if @app.save
-
+        make_tags(@app)
         format.html { redirect_to @app, notice: 'App was successfully created.' }
         format.json { render action: 'show', status: :created, location: @app }
-        
+
       else
         format.html { render action: 'new' }
         format.json { render json: @app.errors, status: :unprocessable_entity }
@@ -73,26 +89,8 @@ class AppsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_app
-      @app = App.find(params[:id])
-      
+      @app = App.find(params[:id])      
     end
-
-    # def make_tags
-    #   App.all.each do |app| 
-    #     words = app.description.split("\s")
-    #     # counts = Hash.new(0)
-    #     # words.each do |w|
-    #     #   counts[w] += 1
-    #     # end
-    #     tag_list = []
-    #     # sorted_tag_list = counts.to_a.sort_by do |word, count|
-    #     #   -count
-    #       tag_list << words
-    #     # end
-    #    tag_list = app.tag_list.join(", ")  
-    #    # tag_list.html_safe  
-    #   end
-    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params

@@ -16,6 +16,7 @@ gem 'jqcloud-rails'
 
 gem 'better_errors'
 gem 'binding_of_caller'
+gem 'smarter_csv'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
