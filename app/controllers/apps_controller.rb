@@ -35,21 +35,16 @@ class AppsController < ApplicationController
       # @category_hash.each_key do |key|
         
       # end
-    @category_hash = {"Business" => 0, "Communication" => 0, "Productivity" => 0, "Money & Finance" => 0, "Marketing & Social Media" => 0, "Music & Video" => 0, "Photos & Graphics" => 0, "Web Design & Development" => 0, "Working Together" => 0, "Travel & Lifestyle" => 0, "Just for Fun" => 0}
+    @category_hash = {"business" => 0, "communication" => 0, "productivity" => 0, "money & finance" => 0, "marketing" => 0, "social media" => 0, "music" => 0, "video" => 0, "photos" => 0, "graphics" => 0, "web design" => 0, "development" => 0, "working together" => 0, "travel" => 0, "lifestyle" => 0, "fun" => 0}
     
   end
     
     def make_tags(app)
-    words_array = app.description.split("\s") 
+    words_array = app.description.downcase.split("\s")
     @tag_categories = []    
      @category_hash.each_key do |key| 
       if words_array.include?(key)
-      @tag_categories << key    
-      # if words_array.include?(subcategory)
-      #   @tag_categories.push subcategory
-      # end      
-      # else  
-      #   @tag_categories << words_array
+      @tag_categories << key       
       end
      end
   end
@@ -62,7 +57,7 @@ class AppsController < ApplicationController
     make_tags(@app)
     @app.tag_list = @tag_categories
     respond_to do |format|
-      if @app.save   
+      if @app.save 
        
         format.html { redirect_to @app, notice: 'App was successfully created.' }
         format.json { render action: 'show', status: :created, location: @app }

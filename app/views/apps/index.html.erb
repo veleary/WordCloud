@@ -1,21 +1,23 @@
-<h1>All Apps</h1>
+
+<h2 span>Search by Category: </h2 /span>
 
 
 
 <div id="tag_cloud">
+  
   <% tag_cloud App.tag_counts, %w{s m l} do |tag, css_class|%>
   <%= link_to tag.name, tag_path(tag.name), class: css_class %>
   <%end%>
 </div>
 
-
+<h1>All Apps</h1>
     <% @apps.each do |app| %>
     
         <h2><%= app.name %><h2>
         <h4><%= app.description %></h4>
         <p>Tags: <%= app.tag_list %></p>
-        <%#= link_to 'Show', app %>
-        <%#= link_to 'Edit', edit_app_path(app) %>
+        <%= link_to 'Show', app %>
+        <%= link_to 'Edit', edit_app_path(app) %>
         <%= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' } %>     
     <% end %>
 <br>
